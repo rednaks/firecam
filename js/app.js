@@ -11,6 +11,12 @@ window.addEventListener('DOMContentLoaded', function() {
 
     function mediaStreamerHandler(localMediaStream) {
       console.log("Successfully got the user's media");
+
+      // Settings our local stream as a source for the video
+      video.src = window.URL.createObjectURL(localMediaStream);
+      // Playing the stream
+      video.play();
+
     }
     
     function doStartStreaming() {
