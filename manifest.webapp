@@ -7,10 +7,14 @@
     "name": "Alexandre BM (aka rednaks)",
     "url": "http://blog.rednaks.tn"
   },
+  "type":"privileged",
   "permissions": {
       "video-capture": {
     "description": "Required to capture video using getUserMedia()"
-  }
+  },
+    "tcp-socket": {
+      "description": "Required for the streaming server"
+    }
   },
   "installs_allowed_from": [
     "*"

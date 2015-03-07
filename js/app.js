@@ -10,6 +10,9 @@ window.addEventListener('DOMContentLoaded', function() {
     var button = document.getElementById("start");
     var streaming = false;
 
+    var server;
+    var conn = null;
+
     function mediaStreamerHandler(localMediaStream) {
       console.log("Successfully got the user's media");
 
@@ -27,6 +30,19 @@ window.addEventListener('DOMContentLoaded', function() {
         return;
       }
 
+            server = navigator.mozTCPSocket.listen(8080);
+
+            server.onconnect = function(connection) {
+              console.log("A device connected to FirefoxOS");
+              conn = connection;
+              
+            };
+
+            server.onerror = function() {
+              console.log("ERRROROR :(");
+            };
+
+            console.log(server);
         navigator.mozGetUserMedia(
             {video: true, audio:false},
             mediaStreamerHandler,
@@ -37,15 +53,20 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    function doSendData() {
+    function doSendData(data) {
+      
 
-      console.log("Sending Data");
+      if(conn != null && conn.readyState == "open"){
+        console.log("Sending data ...");
+        conn.send(data);
+      }
 
     }
     function sendData(){
-      var data = canvas.getDataURL('image/png');
 
+      var data = canvas.toDataURL('image/png');
       doSendData(data);
+
     }
 
     function doDrawOnCanvas() {
@@ -59,8 +80,10 @@ window.addEventListener('DOMContentLoaded', function() {
           canvas.width = video.videoWidth;
           canvas.height = video.videoHeight;
 
-          if(video.videoWidth != 0)
+          if(video.videoWidth != 0) {
             streaming = true;
+            // since we started streaming we can start the server.
+          }
         }
 
       }
@@ -68,6 +91,7 @@ window.addEventListener('DOMContentLoaded', function() {
         ;;
       }
 
+        sendData();
         setTimeout(doDrawOnCanvas, 10);
 
     }
