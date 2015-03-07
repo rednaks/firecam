@@ -1,0 +1,18 @@
+{
+  "version": "0.1.0",
+  "name": "Firecam",
+  "description": "A FirefoxOS webcam",
+  "launch_path": "/index.html",
+  "developer": {
+    "name": "Alexandre BM (aka rednaks)",
+    "url": "http://blog.rednaks.tn"
+  },
+  "permissions": {
+      "video-capture": {
+    "description": "Required to capture video using getUserMedia()"
+  }
+  },
+  "installs_allowed_from": [
+    "*"
+  ]
+}

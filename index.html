@@ -1,8 +1,16 @@
 <!doctype HTML>
 <html>
   <head>
+    <meta charset="utf-8"/>
+    <title>Firecam</title>
+    <script src="js/app.js" language="javascript"></script>
   </head>
   <body>
     <h1>FirefoxOS WebCam</h1>
+
+    <video id="stream" hidden></video>
+    <canvas id="canvas" hidden></canvas>
+
+    <button id="start">Start Webcam</button>
   </body>
 </html>
